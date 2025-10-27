@@ -9,9 +9,6 @@ const Schedule = () => {
   const [nextRun, setNextRun] = useState("10:15");
   const [saving, setSaving] = useState(false);
   const [running, setRunning] = useState(false);
-  // NEW: Core Flow Implementation - storage provider and backfill configuration
-  const [storage, setStorage] = useState('supabase');
-  const [backfill, setBackfill] = useState({ startDate: '', endDate: '', emailLimit: 500 });
 
   useEffect(()=>{
     let canceled = false;
@@ -19,12 +16,6 @@ const Schedule = () => {
       try{ const cfg = await getRetrievalConfig(); if (!canceled){
         setFrequency(cfg.frequency || 'every30');
         setNextRun(cfg.nextRun || '10:15');
-        setStorage(cfg.storage || 'supabase');
-        setBackfill({
-          startDate: cfg.backfill?.startDate || '',
-          endDate: cfg.backfill?.endDate || '',
-          emailLimit: cfg.backfill?.emailLimit ?? 500,
-        });
       } }catch{}
     })();
     return ()=>{ canceled = true; };
@@ -34,14 +25,14 @@ const Schedule = () => {
     // debounce save
     const t = setTimeout(async ()=>{
       try {
-        setSaving(true);
-        await setRetrievalConfig({ frequency, nextRun, storage, backfill });
-      }
+          setSaving(true);
+          await setRetrievalConfig({ frequency, nextRun });
+        }
       catch {}
       finally { setSaving(false); }
     }, 400);
     return ()=>clearTimeout(t);
-  }, [frequency, nextRun, storage, backfill]);
+  }, [frequency, nextRun]);
 
   return (
     <div className="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm">
@@ -81,54 +72,7 @@ const Schedule = () => {
           />
         </div>
 
-        {/* NEW: Core Flow Implementation - storage provider selection */}
-        <div>
-          <label className="block text-sm text-gray-600 mb-1">
-            Storage Provider
-          </label>
-          <select
-            value={storage}
-            onChange={(e) => setStorage(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-          >
-            <option value="supabase">Supabase</option>
-            <option value="gdrive">Google Drive (soon)</option>
-            <option value="onedrive">OneDrive (soon)</option>
-          </select>
-        </div>
-
-        {/* NEW: Core Flow Implementation - backfill controls */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div>
-            <label className="block text-sm text-gray-600 mb-1">Backfill Start</label>
-            <input
-              type="date"
-              value={backfill.startDate || ''}
-              onChange={(e)=>setBackfill((b)=>({ ...b, startDate: e.target.value }))}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-sm text-gray-600 mb-1">Backfill End</label>
-            <input
-              type="date"
-              value={backfill.endDate || ''}
-              onChange={(e)=>setBackfill((b)=>({ ...b, endDate: e.target.value }))}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-sm text-gray-600 mb-1">Email Limit</label>
-            <input
-              type="number"
-              min={1}
-              step={1}
-              value={backfill.emailLimit ?? 500}
-              onChange={(e)=>setBackfill((b)=>({ ...b, emailLimit: Number(e.target.value || 0) }))}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            />
-          </div>
-        </div>
+        {/* Backfill and external storage options removed — keeping only frequency and next run + run now */}
 
         <button
           className="px-4 py-2 bg-black lowercase  text-white rounded-lg hover:bg-gray-800 disabled:opacity-60"
