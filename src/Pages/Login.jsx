@@ -22,7 +22,7 @@ export default function Login() {
         navigate('/dashboard');
       }
     } catch (e) {
-      // ignore storage errors
+      
     }
   }, [navigate]);
 
@@ -45,12 +45,12 @@ export default function Login() {
     try {
       const data = await apiLogin({ email, password });
       if (data) {
-        // store session (if provided) and mark logged in
+       
         if (data.session) {
           try { localStorage.setItem('session', JSON.stringify(data.session)); } catch {}
         }
         localStorage.setItem('isLoggedIn', 'true');
-        // notify other components (e.g., navbar)
+        
         try { window.dispatchEvent(new Event('auth-change')); } catch {}
         navigate('/dashboard');
       } else {
@@ -70,7 +70,7 @@ export default function Login() {
     }
   };
 
-  // Google OAuth support (check status once)
+ 
   const [googleEnabled, setGoogleEnabled] = useState(true);
   const [googleStatusData, setGoogleStatusData] = useState(null);
   useEffect(()=>{
@@ -82,7 +82,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
-        {/* Title */}
+        
         <div className="flex items-center justify-between">
           <button onClick={() => navigate('/')} className="text-sm text-gray-600 hover:text-gray-800">&larr; Back</button>
           <h2 className="font-inter font-bold text-[38px] text-center flex-1">
@@ -118,7 +118,7 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Password */}
+          
           <div>
             <label className="block text-sm font-medium text-gray-600">
               Password
