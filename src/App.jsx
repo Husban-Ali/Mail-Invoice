@@ -33,11 +33,53 @@ function App() {
         // 2) Start with current known session
         let isLoggedIn = !!session;
 
-        // 3) Handle Google OAuth callback (auth=google&ok=1)
+        // 3) Handle OAuth callback (both Google and other providers)
         try {
           const params = new URLSearchParams(location.search || '');
+          
+          // Supabase OAuth callback detection (has access_token or code in hash/query)
+          const hashParams = new URLSearchParams(location.hash.substring(1));
+          const hasSupabaseToken = hashParams.get('access_token') || params.get('code');
+          
+          if (hasSupabaseToken) {
+            // Supabase will automatically handle the session via onAuthStateChange
+            // Just wait a bit for it to complete
+            await new Promise(r => setTimeout(r, 1000));
+            
+            // Check if session is now available
+            const storedSession = localStorage.getItem('session');
+            if (storedSession) {
+              isLoggedIn = true;
+              // Clean up URL
+              navigate(location.pathname, { replace: true });
+            }
+          }
+          
+          // Legacy backend OAuth callback (auth=google&ok=1&token=...)
           const fromGoogle = params.get('auth') === 'google' && params.get('ok') === '1';
-          if (fromGoogle) {
+          const sessionToken = params.get('token');
+          
+          if (fromGoogle && sessionToken) {
+            // Decode base64 session token
+            try {
+              const sessionJson = atob(sessionToken);
+              const session = JSON.parse(sessionJson);
+              
+              // Store session in localStorage
+              localStorage.setItem('session', JSON.stringify(session));
+              localStorage.setItem('isLoggedIn', 'true');
+              
+              // Dispatch auth change event
+              try { window.dispatchEvent(new Event('auth-change')); } catch {}
+              
+              // Clean up URL
+              if (location.search) navigate(location.pathname, { replace: true });
+              isLoggedIn = true;
+            } catch (decodeError) {
+              console.error('[auth] Failed to decode session token:', decodeError);
+            }
+          } else if (fromGoogle) {
+            // Old flow without token (fallback)
             localStorage.setItem('isLoggedIn', 'true');
             try { window.dispatchEvent(new Event('auth-change')); } catch {}
             if (location.search) navigate(location.pathname, { replace: true });

@@ -4,7 +4,6 @@ import GoogleLoginButton from "../Component/Google.jsx";
 import { useNavigate } from 'react-router-dom';
 import { Mail, CheckCircle2 } from "lucide-react";
 import { signup as apiSignup } from '../lib/api';
-import Swal from 'sweetalert2';
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -235,55 +234,8 @@ export default function SignUpPage() {
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-3 gap-3">
-              <button
-                type="button"
-                onClick={() => Swal.fire({
-                  title: 'Coming Soon!',
-                  text: 'Google signup will be available soon.',
-                  icon: 'info',
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true
-                })}
-                className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                Google
-              </button>
-              <button
-                type="button"
-                onClick={() => Swal.fire({
-                  title: 'Coming Soon!',
-                  text: 'Microsoft signup will be available soon.',
-                  icon: 'info',
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true
-                })}
-                className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                Microsoft
-              </button>
-              <button
-                type="button"
-                onClick={() => Swal.fire({
-                  title: 'Coming Soon!',
-                  text: 'IMAP signup will be available soon.',
-                  icon: 'info',
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true
-                })}
-                className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                IMAP
-              </button>
+            <div className="mt-6 flex justify-center">
+              <GoogleLoginButton className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Google</GoogleLoginButton>
             </div>
 
             {/* Already have account */}

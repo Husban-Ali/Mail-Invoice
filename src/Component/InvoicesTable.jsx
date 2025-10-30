@@ -7,6 +7,46 @@ const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds 
   const translateIfNeeded = (key, fallback) =>
     i18n.language === "de" ? t(key) : fallback;
 
+  // Handle file download - force download instead of opening in browser
+  const handleDownload = async (fileUrl, filename, format) => {
+    try {
+      // Determine correct MIME type based on format
+      const mimeTypes = {
+        'PDF': 'application/pdf',
+        'XML': 'application/xml',
+        'Scan': 'image/jpeg'
+      };
+      
+      // Fetch file
+      const response = await fetch(fileUrl);
+      const blob = await response.blob();
+      
+      // Create a new blob with correct MIME type
+      const correctMimeType = mimeTypes[format] || blob.type || 'application/octet-stream';
+      const typedBlob = new Blob([blob], { type: correctMimeType });
+      
+      // Create blob URL and trigger download
+      const blobUrl = window.URL.createObjectURL(typedBlob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      
+      // Set correct file extension
+      const extension = format?.toLowerCase() || 'pdf';
+      link.download = filename ? `${filename}.${extension}` : `invoice.${extension}`;
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Clean up blob URL
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error('Download error:', error);
+      // Fallback: open in new tab if download fails
+      window.open(fileUrl, '_blank');
+    }
+  };
+
   const getStatusStyle = (status) => {
     switch (status) {
       case "Parsed":
@@ -149,16 +189,13 @@ const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds 
                         <option value="Error">Error</option>
                       </select>
                       {row.file_url && (
-                        <a
-                          href={row.file_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          download
+                        <button
+                          onClick={() => handleDownload(row.file_url, row.id, row.format)}
                           className="px-3 py-1 text-xs bg-green-500 text-white rounded-md hover:bg-green-600 transition"
                           title="Download Invoice File"
                         >
-                          Export
-                        </a>
+                          Download
+                        </button>
                       )}
                       <button
                         onClick={() => onAssignClick(row)}

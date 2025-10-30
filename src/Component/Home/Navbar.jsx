@@ -50,30 +50,26 @@ export default function Navbar() {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
           className="flex items-center select-none"
-          style={{ cursor: "default" }}
         >
           <motion.img
             src={navlogo1}
             alt="Mail Invoice Logo"
             className="h-16 w-auto object-contain select-none"
-            style={{ cursor: "default" }}
           />
         </motion.div>
 
         {/* Desktop Links */}
         <motion.div
-          className="hidden md:flex items-center gap-6 select-none"
+          className="hidden md:flex items-center gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          style={{ cursor: "default" }}
         >
           {navLinks.map((link, index) => (
             <NavLink
               key={index}
               to={link.href}
-              className="text-black text-lg font-dm font-semibold hover:text-black transition select-none"
-              style={{ cursor: "default" }}
+              className="text-black text-lg font-dm font-semibold hover:text-black transition cursor-pointer"
             >
               {i18n.language === "de" ? link.de : link.en}
             </NavLink>
@@ -82,25 +78,22 @@ export default function Navbar() {
 
         {/* Desktop Right Section */}
         <motion.div
-          className="hidden md:flex items-center gap-3 select-none"
+          className="hidden md:flex items-center gap-3"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.7 }}
-          style={{ cursor: "default" }}
         >
           {!isLoggedIn ? (
             <>
               <a
                 href="/login"
-                className="px-4 py-2 border border-black rounded-md bg-white text-sm select-none"
-                style={{ cursor: "default" }}
+                className="px-4 py-2 border border-black rounded-md bg-white text-sm cursor-pointer hover:bg-gray-50"
               >
                 {i18n.language === "de" ? "Einloggen" : "login Now"}
               </a>
               <a
                 href="/signup"
-                className="px-4 py-2 bg-black text-white rounded-md border border-black text-sm select-none"
-                style={{ cursor: "default" }}
+                className="px-4 py-2 bg-black text-white rounded-md border border-black text-sm cursor-pointer hover:bg-gray-800"
               >
                 {i18n.language === "de" ? "Registrieren" : "sign Up Now"}
               </a>
@@ -109,8 +102,7 @@ export default function Navbar() {
             <>
               <a
                 href="/dashboard"
-                className="px-4 py-2 border border-black rounded-md bg-white text-sm select-none"
-                style={{ cursor: "default" }}
+                className="px-4 py-2 border border-black rounded-md bg-white text-sm cursor-pointer hover:bg-gray-50"
               >
                 Dashboard
               </a>
@@ -121,8 +113,7 @@ export default function Navbar() {
                   window.dispatchEvent(new Event('auth-change'));
                   window.location.href = '/';
                 }}
-                className="px-4 py-2 bg-black text-white rounded-md border border-black text-sm select-none"
-                style={{ cursor: "default" }}
+                className="px-4 py-2 bg-black text-white rounded-md border border-black text-sm cursor-pointer hover:bg-gray-800"
               >
                 Logout
               </button>
@@ -130,11 +121,10 @@ export default function Navbar() {
           )}
 
           {/* Language Dropdown */}
-          <div className="relative ml-3 select-none" style={{ cursor: "default" }}>
+          <div className="relative ml-3">
             <button
               onClick={() => setShowLangDropdown(!showLangDropdown)}
-              className="flex items-center gap-1 text-base font-semibold text-black select-none"
-              style={{ cursor: "default" }}
+              className="flex items-center gap-1 text-base font-semibold text-black cursor-pointer hover:text-gray-700"
             >
               {currentLang} <ChevronDown size={16} />
             </button>
@@ -146,20 +136,17 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-2 w-32 bg-white shadow-md rounded-md border border-gray-200 select-none"
-                  style={{ cursor: "default" }}
+                  className="absolute right-0 mt-2 w-32 bg-white shadow-md rounded-md border border-gray-200"
                 >
                   <button
                     onClick={() => changeLanguage("en")}
-                    className="block w-full text-left px-4 py-2 text-sm select-none"
-                    style={{ cursor: "default" }}
+                    className="block w-full text-left px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
                   >
                     English
                   </button>
                   <button
                     onClick={() => changeLanguage("de")}
-                    className="block w-full text-left px-4 py-2 text-sm select-none"
-                    style={{ cursor: "default" }}
+                    className="block w-full text-left px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
                   >
                     German
                   </button>
@@ -170,8 +157,8 @@ export default function Navbar() {
         </motion.div>
 
         {/* Mobile Hamburger */}
-        <div className="md:hidden select-none" style={{ cursor: "default" }}>
-          <button onClick={() => setIsOpen(!isOpen)} style={{ cursor: "default" }}>
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>

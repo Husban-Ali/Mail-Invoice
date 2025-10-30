@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import outloo from "../assets/outloo.png";
 import { Link, useNavigate } from "react-router-dom";  // ✅ yeh import zaroori hai
 import { login as apiLogin, googleStatus, startGoogleOAuth } from '../lib/api';
-import Swal from 'sweetalert2';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -178,54 +176,14 @@ export default function Login() {
           <div className="flex-grow border-t"></div>
         </div>
 
-        {/* Social Login */}
-        <div className="flex justify-center space-x-4">
-          <button 
-            onClick={() => Swal.fire({
-              title: 'Coming Soon!',
-              text: 'Google login will be available soon.',
-              icon: 'info',
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true
-            })} 
+        {/* Social Login: Google only */}
+        <div className="flex justify-center">
+          <button
+            onClick={() => startGoogleOAuth()}
             className="flex items-center gap-2 border rounded-lg px-4 py-2 hover:bg-gray-50 text-black font-semibold text-[18px]"
           >
             <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" className="w-5 h-5" />
-            Google
-          </button>
-          <button 
-            onClick={() => Swal.fire({
-              title: 'Coming Soon!',
-              text: 'Outlook login will be available soon.',
-              icon: 'info',
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true
-            })}
-            className="flex items-center gap-2 border rounded-lg px-4 py-2 hover:bg-gray-50 text-black font-semibold  text-[18px] "
-          >
-            <img src={outloo} alt="Outlook" className="w-5 h-5" />
-            Outlook
-          </button>
-          <button 
-            onClick={() => Swal.fire({
-              title: 'Coming Soon!',
-              text: 'IMAP login will be available soon.',
-              icon: 'info',
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true
-            })}
-            className="flex items-center gap-2 border rounded-lg px-4 py-2 hover:bg-gray-50 text-black font-semibold  text-[18px]"
-          >
-            IMAP
+            Sign in with Google
           </button>
         </div>
       </div>

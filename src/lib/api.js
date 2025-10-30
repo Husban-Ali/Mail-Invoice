@@ -10,7 +10,7 @@ const inferApiBase = () => {
     // Prefer 8080 (backend), fallback 3000
     return `${protocol}//${hostname}:8080`;
   } catch {
-    return 'https://hus-three.vercel.app';
+    return 'http://localhost:8080';
   }
 };
 
@@ -111,8 +111,26 @@ export const googleStatus = async () => {
   }
 };
 
-export const startGoogleOAuth = () => {
-  window.open(`${API_BASE}/api/auth/google`, '_self');
+export const startGoogleOAuth = async () => {
+  // Use Supabase's built-in Google OAuth instead of custom backend implementation
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
+    });
+    
+    if (error) {
+      console.error('[oauth] Supabase Google OAuth error:', error);
+      // Fallback to backend implementation
+      window.open(`${API_BASE}/api/auth/google`, '_self');
+    }
+  } catch (err) {
+    console.error('[oauth] Failed to initiate Google OAuth:', err);
+    // Fallback to backend implementation
+    window.open(`${API_BASE}/api/auth/google`, '_self');
+  }
 };
 
 //

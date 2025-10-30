@@ -73,7 +73,8 @@ const ScrapedData = () => {
           amount: item.amount,
           format: item.format,
           status: item.status,
-          _rawId: item.id // Keep raw ID for operations
+          _rawId: item.id, // Keep raw ID for operations
+          file_url: item.raw?.file_path || null // Add file URL for download
         }));
 
         setData(transformedData);
