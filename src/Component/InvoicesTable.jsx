@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds = () => {}, onAssignClick = () => {} }) => {
-  const { t, i18n } = useTranslation();
-
-  const translateIfNeeded = (key, fallback) =>
-    i18n.language === "de" ? t(key) : fallback;
+  const { t } = useTranslation();
 
   // Handle file download - force download instead of opening in browser
   const handleDownload = async (fileUrl, filename, format) => {
@@ -109,7 +106,7 @@ const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds 
   return (
     <div>
       <h2 className="text-xl font-semibold mx-6 my-4">
-        {translateIfNeeded("invoicesTable.title", "Scraped Data (Invoices)")}
+        {t("invoicesTable.title")}
       </h2>
       <div className="border border-gray-200 rounded-2xl bg-white shadow-sm overflow-x-auto">
         <table className="w-full text-sm border-collapse">
@@ -126,13 +123,13 @@ const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds 
                   className="w-4 h-4 cursor-pointer"
                 />
               </th>
-              <th className="py-2 px-3">{translateIfNeeded("invoicesTable.date", "Date")}</th>
-              <th className="py-2 px-3">{translateIfNeeded("invoicesTable.company", "Company")}</th>
-              <th className="py-2 px-3">{translateIfNeeded("invoicesTable.invoice", "Invoice #")}</th>
-              <th className="py-2 px-3">{translateIfNeeded("invoicesTable.amount", "Amount")}</th>
-              <th className="py-2 px-3">{translateIfNeeded("invoicesTable.format", "Format")}</th>
-              <th className="py-2 px-3">{translateIfNeeded("invoicesTable.status", "Status")}</th>
-              <th className="py-2 px-3">{translateIfNeeded("invoicesTable.actions", "Actions")}</th>
+              <th className="py-2 px-3">{t("invoicesTable.date")}</th>
+              <th className="py-2 px-3">{t("invoicesTable.company")}</th>
+              <th className="py-2 px-3">{t("invoicesTable.invoice")}</th>
+              <th className="py-2 px-3">{t("invoicesTable.amount")}</th>
+              <th className="py-2 px-3">{t("invoicesTable.format")}</th>
+              <th className="py-2 px-3">{t("invoicesTable.status")}</th>
+              <th className="py-2 px-3">{t("invoicesTable.actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -172,7 +169,7 @@ const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds 
                       )}`}
                     >
                       <span className={`w-2.5 h-2.5 rounded-full ${getDotColor(row.status)}`}></span>
-                      {translateIfNeeded(`invoicesTable.${row.status.toLowerCase()}`, row.status)}
+                      {t(`invoicesTable.${row.status.toLowerCase()}`, row.status)}
                     </span>
                   </td>
                   <td className="py-2 px-3">
@@ -182,11 +179,11 @@ const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds 
                         onChange={(e) => onStatusUpdate(row.id, e.target.value)}
                         className="px-2 py-1 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
-                        <option value="Pending">Pending</option>
-                        <option value="Parsed">Parsed</option>
-                        <option value="Assigned">Assigned</option>
-                        <option value="Approved">Approved</option>
-                        <option value="Error">Error</option>
+                        <option value="Pending">{t("invoicesTable.pending", "Pending")}</option>
+                        <option value="Parsed">{t("invoicesTable.parsed", "Parsed")}</option>
+                        <option value="Assigned">{t("invoicesTable.assigned", "Assigned")}</option>
+                        <option value="Approved">{t("invoicesTable.approved", "Approved")}</option>
+                        <option value="Error">{t("invoicesTable.error", "Error")}</option>
                       </select>
                       {row.file_url && (
                         <button
@@ -194,7 +191,7 @@ const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds 
                           className="px-3 py-1 text-xs bg-green-500 text-white rounded-md hover:bg-green-600 transition"
                           title="Download Invoice File"
                         >
-                          Download
+                          {t("invoicesTable.download", "Download")}
                         </button>
                       )}
                       <button
@@ -202,7 +199,7 @@ const InvoicesTable = ({ data, onStatusUpdate, selectedIds = [], setSelectedIds 
                         className="px-3 py-1 text-xs bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
                         title="Assign & Send Email"
                       >
-                        Assign
+                        {t("invoicesTable.assign", "Assign")}
                       </button>
                     </div>
                   </td>

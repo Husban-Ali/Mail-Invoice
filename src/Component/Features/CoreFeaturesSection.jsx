@@ -1,37 +1,40 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function CoreFeaturesSection() {
+  const { t } = useTranslation();
+  
   const features = [
     {
       icon: "⚡",
-      title: "Fast Performance",
-      desc: "Optimized for speed, ensuring smooth experiences even with large datasets.",
+      title: t("features.core.performance.title"),
+      desc: t("features.core.performance.desc"),
     },
     {
       icon: "🔒",
-      title: "Secure by Design",
-      desc: "Your data is protected with the latest encryption and privacy standards.",
+      title: t("features.core.secure.title"),
+      desc: t("features.core.secure.desc"),
     },
     {
       icon: "🤝",
-      title: "Collaboration Tools",
-      desc: "Work with your team in real time with shared dashboards and activity tracking.",
+      title: t("features.core.collaboration.title"),
+      desc: t("features.core.collaboration.desc"),
     },
     {
       icon: "📊",
-      title: "Advanced Analytics",
-      desc: "Visualize insights instantly with detailed charts and custom reports.",
+      title: t("features.core.analytics.title"),
+      desc: t("features.core.analytics.desc"),
     },
     {
       icon: "☁️",
-      title: "Cloud Integrated",
-      desc: "Seamlessly connect with cloud services to keep your workflow in sync.",
+      title: t("features.core.cloud.title"),
+      desc: t("features.core.cloud.desc"),
     },
     {
       icon: "⚙️",
-      title: "Customizable Workflows",
-      desc: "Adapt the platform to your needs with flexible configuration options.",
+      title: t("features.core.workflows.title"),
+      desc: t("features.core.workflows.desc"),
     },
   ];
 
@@ -44,7 +47,7 @@ export default function CoreFeaturesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Key Features
+          {t("features.core.title")}
         </motion.h2>
         <motion.p
           className="text-gray-600 max-w-2xl mx-auto mb-12"
@@ -52,7 +55,7 @@ export default function CoreFeaturesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Each feature is built to save you time, enhance productivity, and bring simplicity to complex workflows.
+          {t("features.core.subtitle")}
         </motion.p>
 
         <motion.div

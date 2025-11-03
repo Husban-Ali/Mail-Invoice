@@ -106,9 +106,15 @@ i18n
                     amount: "amount",
                     format: "format",
                     status: "status",
+                    actions: "actions",
                     parsed: "parsed",
                     pending: "pending",
-                    error: "error"
+                    assigned: "assigned",
+                    approved: "approved",
+                    error: "error",
+                    noResults: "No data found",
+                    download: "Download",
+                    assign: "Assign"
                 },
                   dashboard: {
     "title": "Automating Financial",
@@ -228,13 +234,6 @@ i18n
                     runNow: "Run Now"
                 },
                 
-                invoicesTable: {
-                    title: "recently crawled invoices",
-                    company: "company",
-                    amount: "amount",
-                    invoice: "invoice #",
-                    email: "email Account",
-                },
                 tableActions: {
   assign: "Assign",
   approve: "Approve",
@@ -262,7 +261,207 @@ i18n
   parsed: "Parsed",
   errors: "Errors",
   pending: "Pending"
-}
+},
+                timeMetrics: {
+                    thisWeek: "This Week",
+                    thisMonth: "This Month",
+                    thisYear: "This Year"
+                },
+                rulesAutomation: {
+                    title: "Rules & Automation",
+                    addNewRule: "Add New Rule",
+                    name: "Name",
+                    trigger: "Trigger",
+                    action: "Action",
+                    status: "Status",
+                    active: "Active",
+                    inactive: "Inactive",
+                    loading: "Loading...",
+                    noRules: "No rules defined",
+                    edit: "Edit",
+                    duplicate: "Duplicate",
+                    delete: "Delete",
+                    close: "Close"
+                },
+                masterData: {
+                    title: "Master Data",
+                    subtitle: "Manage foundational data like suppliers and, in the future, products, tax codes, and categories.",
+                    suppliers: "Suppliers",
+                    suppliersDesc: "Directory, details, contacts, merge, review queue, and keyword matching for emails.",
+                    openSuppliers: "Open Suppliers",
+                    products: "Products (coming soon)",
+                    productsDesc: "Standardize product catalog and mappings.",
+                    taxCodes: "Tax Codes (coming soon)",
+                    taxCodesDesc: "Define tax codes and validation rules.",
+                    categories: "Categories (coming soon)",
+                    categoriesDesc: "Set up spend categories and mappings.",
+                    notAvailable: "Not Available"
+                },
+                suppliers: {
+                    title: "Suppliers",
+                    name: "Name",
+                    status: "Status",
+                    details: "Supplier Details",
+                    supplier: "Supplier",
+                    taxId: "Tax ID",
+                    country: "Country",
+                    category: "Category",
+                    add: "Add",
+                    editInfo: "Edit Info",
+                    merge: "Merge",
+                    findDuplicates: "Find Duplicates",
+                    blockSupplier: "Block Supplier",
+                    delete: "Delete",
+                    editSupplierInfo: "Edit Supplier Info",
+                    saveChanges: "Save Changes",
+                    cancel: "Cancel",
+                    mergeSuppliers: "Merge Suppliers",
+                    merging: "You are merging:",
+                    result: "Result:",
+                    keepFirst: "Keep first selected as main record",
+                    combineInvoices: "Combine invoices and tags",
+                    archiveDuplicates: "Archive duplicate records",
+                    blockSuppliers: "Block Suppliers",
+                    confirmBlock: "Are you sure you want to block the following suppliers?",
+                    confirmBlockBtn: "Confirm Block",
+                    duplicateGroups: "Possible Duplicate Groups",
+                    group: "Group",
+                    records: "records",
+                    selectMerge: "Select & Merge",
+                    select: "Select",
+                    merged: "Merged",
+                    blocked: "Blocked"
+                },
+                account: {
+                    title: "Account Settings",
+                    subtitle: "Manage your account information",
+                    fullName: "Full Name",
+                    email: "Email Address",
+                    emailNote: "Email cannot be changed",
+                    phone: "Phone Number (Optional)",
+                    editProfile: "Edit Profile",
+                    saveChanges: "Save Changes",
+                    cancel: "Cancel",
+                    security: "Security",
+                    changePassword: "Change Password",
+                    changePasswordDesc: "Update your password to keep your account secure",
+                    twoFactor: "Two-Factor Authentication",
+                    twoFactorDesc: "Add an extra layer of security to your account",
+                    loading: "Loading profile...",
+                    updateSuccess: "Profile updated successfully!",
+                    updateFailed: "Failed to update profile",
+                    loadFailed: "Failed to load profile"
+                },
+                export: {
+                    title: "Exports",
+                    newTemplate: "New Template",
+                    createPresets: "Create Presets",
+                    close: "Close",
+                    templateName: "Template name",
+                    entity: "Entity",
+                    format: "Format",
+                    fields: "Fields",
+                    fieldsPlaceholder: "Fields (comma-separated)",
+                    actions: "Actions",
+                    saveTemplate: "Save Template",
+                    saving: "Saving…",
+                    loading: "Loading…",
+                    noTemplates: "No templates yet",
+                    run: "Run",
+                    running: "Running…",
+                    delete: "Delete",
+                    recentRuns: "Recent runs",
+                    runAdhoc: "Run Ad-hoc",
+                    noRuns: "No runs yet",
+                    name: "Name",
+                    status: "Status",
+                    rows: "Rows",
+                    finished: "Finished",
+                    download: "Download",
+                    adHoc: "(ad-hoc)",
+                    invoices: "Invoices",
+                    suppliers: "Suppliers",
+                    rules: "Rules",
+                    completed: "Completed",
+                    failed: "Failed",
+                    noFile: "No file"
+                },
+                userManagement: {
+                    title: "User Management",
+                    name: "Name",
+                    email: "Email",
+                    status: "Status",
+                    actions: "Actions",
+                    loading: "Loading...",
+                    loadFailed: "Failed to load users",
+                    active: "Active",
+                    inactive: "Inactive",
+                    blocked: "Blocked"
+                },
+                about: {
+                    hero: {
+                        title: "About Our Journey",
+                        subtitle: "We're a passionate team building innovative digital solutions to simplify your workflow."
+                    },
+                    mission: {
+                        title: "What Drives Us",
+                        subtitle: "We believe in crafting software that makes everyday work simpler, faster, and smarter.",
+                        ourMission: "Our Mission",
+                        ourMissionDesc: "To empower teams and individuals through accessible and impactful software solutions.",
+                        ourVision: "Our Vision",
+                        ourVisionDesc: "To become a global leader in innovation-driven digital transformation."
+                    },
+                    team: {
+                        title: "Meet Our Team",
+                        founder: "Founder & CEO",
+                        designer: "UI/UX Designer",
+                        developer: "Lead Developer"
+                    }
+                },
+                features: {
+                    hero: {
+                        title: "Powerful Features to Supercharge Your Workflow",
+                        subtitle: "Discover tools designed to make your work faster, smarter, and more collaborative."
+                    },
+                    core: {
+                        title: "Key Features",
+                        subtitle: "Each feature is built to save you time, enhance productivity, and bring simplicity to complex workflows.",
+                        performance: { title: "Fast Performance", desc: "Optimized for speed, ensuring smooth experiences even with large datasets." },
+                        secure: { title: "Secure by Design", desc: "Your data is protected with the latest encryption and privacy standards." },
+                        collaboration: { title: "Collaboration Tools", desc: "Work with your team in real time with shared dashboards and activity tracking." },
+                        analytics: { title: "Advanced Analytics", desc: "Visualize insights instantly with detailed charts and custom reports." },
+                        cloud: { title: "Cloud Integrated", desc: "Seamlessly connect with cloud services to keep your workflow in sync." },
+                        workflows: { title: "Customizable Workflows", desc: "Adapt the platform to your needs with flexible configuration options." }
+                    },
+                    highlight: {
+                        title: "Seamless Integration",
+                        desc: "Connect your favorite tools like Slack, Google Drive, and Notion in seconds. Our integrations keep everything in sync—so you can focus on creating, not switching tabs.",
+                        learnMore: "Learn More"
+                    }
+                },
+                contact: {
+                    title: "Get in Touch With Us",
+                    subtitle: "Have questions, feedback, or ideas? We'd love to hear from you. Reach out and our team will get back to you as soon as possible.",
+                    address: "Address",
+                    phone: "Phone",
+                    email: "Email",
+                    formName: "Your Name",
+                    formNamePlaceholder: "Enter your name",
+                    formEmail: "Email Address",
+                    formEmailPlaceholder: "Enter your email",
+                    formMessage: "Message",
+                    formMessagePlaceholder: "Write your message...",
+                    sendButton: "Send Message"
+                },
+                resourcesPage: {
+                    title: "Resources",
+                    subtitle: "Discover helpful tools, guides, and communities to accelerate your learning and productivity.",
+                    designGuidelines: { title: "Design Guidelines", desc: "Explore UI/UX best practices and modern design systems for your next project." },
+                    devTools: { title: "Development Tools", desc: "A curated list of tools and frameworks that streamline your workflow." },
+                    learning: { title: "Learning Materials", desc: "Access free and premium resources to sharpen your coding and design skills." },
+                    community: { title: "Community Forums", desc: "Join communities and discussions to share ideas and grow together." },
+                    learnMore: "Learn More"
+                }
 
             },
         },
@@ -299,6 +498,206 @@ i18n
   errors: "Fehler",
   pending: "Ausstehend"
 },
+                timeMetrics: {
+                    thisWeek: "Diese Woche",
+                    thisMonth: "Dieser Monat",
+                    thisYear: "Dieses Jahr"
+                },
+                rulesAutomation: {
+                    title: "Regeln & Automatisierung",
+                    addNewRule: "Neue Regel hinzufügen",
+                    name: "Name",
+                    trigger: "Auslöser",
+                    action: "Aktion",
+                    status: "Status",
+                    active: "Aktiv",
+                    inactive: "Inaktiv",
+                    loading: "Laden...",
+                    noRules: "Keine Regeln definiert",
+                    edit: "Bearbeiten",
+                    duplicate: "Duplizieren",
+                    delete: "Löschen",
+                    close: "Schließen"
+                },
+                masterData: {
+                    title: "Stammdaten",
+                    subtitle: "Verwalten Sie grundlegende Daten wie Lieferanten und zukünftig Produkte, Steuercodes und Kategorien.",
+                    suppliers: "Lieferanten",
+                    suppliersDesc: "Verzeichnis, Details, Kontakte, Zusammenführung, Prüfungswarteschlange und Keyword-Matching für E-Mails.",
+                    openSuppliers: "Lieferanten öffnen",
+                    products: "Produkte (demnächst)",
+                    productsDesc: "Produktkatalog und Zuordnungen standardisieren.",
+                    taxCodes: "Steuercodes (demnächst)",
+                    taxCodesDesc: "Steuercodes und Validierungsregeln definieren.",
+                    categories: "Kategorien (demnächst)",
+                    categoriesDesc: "Ausgabenkategorien und Zuordnungen einrichten.",
+                    notAvailable: "Nicht verfügbar"
+                },
+                suppliers: {
+                    title: "Lieferanten",
+                    name: "Name",
+                    status: "Status",
+                    details: "Lieferantendetails",
+                    supplier: "Lieferant",
+                    taxId: "Steuer-ID",
+                    country: "Land",
+                    category: "Kategorie",
+                    add: "Hinzufügen",
+                    editInfo: "Info bearbeiten",
+                    merge: "Zusammenführen",
+                    findDuplicates: "Duplikate finden",
+                    blockSupplier: "Lieferant blockieren",
+                    delete: "Löschen",
+                    editSupplierInfo: "Lieferanteninfo bearbeiten",
+                    saveChanges: "Änderungen speichern",
+                    cancel: "Abbrechen",
+                    mergeSuppliers: "Lieferanten zusammenführen",
+                    merging: "Sie führen zusammen:",
+                    result: "Ergebnis:",
+                    keepFirst: "Erste Auswahl als Hauptdatensatz behalten",
+                    combineInvoices: "Rechnungen und Tags kombinieren",
+                    archiveDuplicates: "Duplizierte Datensätze archivieren",
+                    blockSuppliers: "Lieferanten blockieren",
+                    confirmBlock: "Möchten Sie die folgenden Lieferanten wirklich blockieren?",
+                    confirmBlockBtn: "Blockierung bestätigen",
+                    duplicateGroups: "Mögliche Duplikate-Gruppen",
+                    group: "Gruppe",
+                    records: "Datensätze",
+                    selectMerge: "Auswählen & Zusammenführen",
+                    select: "Auswählen",
+                    merged: "Zusammengeführt",
+                    blocked: "Blockiert"
+                },
+                account: {
+                    title: "Kontoeinstellungen",
+                    subtitle: "Verwalten Sie Ihre Kontoinformationen",
+                    fullName: "Vollständiger Name",
+                    email: "E-Mail-Adresse",
+                    emailNote: "E-Mail kann nicht geändert werden",
+                    phone: "Telefonnummer (Optional)",
+                    editProfile: "Profil bearbeiten",
+                    saveChanges: "Änderungen speichern",
+                    cancel: "Abbrechen",
+                    security: "Sicherheit",
+                    changePassword: "Passwort ändern",
+                    changePasswordDesc: "Aktualisieren Sie Ihr Passwort, um Ihr Konto zu schützen",
+                    twoFactor: "Zwei-Faktor-Authentifizierung",
+                    twoFactorDesc: "Fügen Sie eine zusätzliche Sicherheitsebene zu Ihrem Konto hinzu",
+                    loading: "Profil wird geladen...",
+                    updateSuccess: "Profil erfolgreich aktualisiert!",
+                    updateFailed: "Profil-Aktualisierung fehlgeschlagen",
+                    loadFailed: "Profil konnte nicht geladen werden"
+                },
+                export: {
+                    title: "Exporte",
+                    newTemplate: "Neue Vorlage",
+                    createPresets: "Voreinstellungen erstellen",
+                    close: "Schließen",
+                    templateName: "Vorlagenname",
+                    entity: "Entität",
+                    format: "Format",
+                    fields: "Felder",
+                    fieldsPlaceholder: "Felder (durch Komma getrennt)",
+                    actions: "Aktionen",
+                    saveTemplate: "Vorlage speichern",
+                    saving: "Speichern…",
+                    loading: "Laden…",
+                    noTemplates: "Noch keine Vorlagen",
+                    run: "Ausführen",
+                    running: "Läuft…",
+                    delete: "Löschen",
+                    recentRuns: "Letzte Ausführungen",
+                    runAdhoc: "Ad-hoc ausführen",
+                    noRuns: "Noch keine Ausführungen",
+                    name: "Name",
+                    status: "Status",
+                    rows: "Zeilen",
+                    finished: "Abgeschlossen",
+                    download: "Herunterladen",
+                    adHoc: "(ad-hoc)",
+                    invoices: "Rechnungen",
+                    suppliers: "Lieferanten",
+                    rules: "Regeln",
+                    completed: "Abgeschlossen",
+                    failed: "Fehlgeschlagen",
+                    noFile: "Keine Datei"
+                },
+                userManagement: {
+                    title: "Benutzerverwaltung",
+                    name: "Name",
+                    email: "E-Mail",
+                    status: "Status",
+                    actions: "Aktionen",
+                    loading: "Laden...",
+                    loadFailed: "Benutzer konnten nicht geladen werden",
+                    active: "Aktiv",
+                    inactive: "Inaktiv",
+                    blocked: "Blockiert"
+                },
+                about: {
+                    hero: {
+                        title: "Über unsere Reise",
+                        subtitle: "Wir sind ein leidenschaftliches Team, das innovative digitale Lösungen entwickelt, um Ihren Arbeitsablauf zu vereinfachen."
+                    },
+                    mission: {
+                        title: "Was uns antreibt",
+                        subtitle: "Wir glauben daran, Software zu entwickeln, die die tägliche Arbeit einfacher, schneller und intelligenter macht.",
+                        ourMission: "Unsere Mission",
+                        ourMissionDesc: "Teams und Einzelpersonen durch zugängliche und wirkungsvolle Softwarelsungen zu stärken.",
+                        ourVision: "Unsere Vision",
+                        ourVisionDesc: "Ein globaler Führer in innovationsgetriebener digitaler Transformation zu werden."
+                    },
+                    team: {
+                        title: "Lernen Sie unser Team kennen",
+                        founder: "Gründer & CEO",
+                        designer: "UI/UX Designer",
+                        developer: "Lead-Entwickler"
+                    }
+                },
+                features: {
+                    hero: {
+                        title: "Leistungsstarke Funktionen zur Optimierung Ihres Workflows",
+                        subtitle: "Entdecken Sie Tools, die Ihre Arbeit schneller, intelligenter und kollaborativer machen."
+                    },
+                    core: {
+                        title: "Hauptfunktionen",
+                        subtitle: "Jede Funktion wurde entwickelt, um Ihnen Zeit zu sparen, die Produktivität zu steigern und komplexe Arbeitsabläufe zu vereinfachen.",
+                        performance: { title: "Schnelle Leistung", desc: "Optimiert für Geschwindigkeit und sorgt für reibungslose Erlebnisse auch bei großen Datensätzen." },
+                        secure: { title: "Sicher im Design", desc: "Ihre Daten sind mit den neuesten Verschlüsselungs- und Datenschutzstandards geschützt." },
+                        collaboration: { title: "Kollaborationstools", desc: "Arbeiten Sie in Echtzeit mit Ihrem Team mit gemeinsamen Dashboards und Aktivitätsverfolgung." },
+                        analytics: { title: "Erweiterte Analysen", desc: "Visualisieren Sie Einblicke sofort mit detaillierten Diagrammen und benutzerdefinierten Berichten." },
+                        cloud: { title: "Cloud-integriert", desc: "Verbinden Sie sich nahtlos mit Cloud-Diensten, um Ihren Workflow synchron zu halten." },
+                        workflows: { title: "Anpassbare Workflows", desc: "Passen Sie die Plattform mit flexiblen Konfigurationsoptionen an Ihre Bedürfnisse an." }
+                    },
+                    highlight: {
+                        title: "Nahtlose Integration",
+                        desc: "Verbinden Sie Ihre Lieblingswerkzeuge wie Slack, Google Drive und Notion in Sekunden. Unsere Integrationen halten alles synchron—damit Sie sich auf das Erstellen konzentrieren können, nicht auf das Wechseln von Tabs.",
+                        learnMore: "Mehr erfahren"
+                    }
+                },
+                contact: {
+                    title: "Kontaktieren Sie uns",
+                    subtitle: "Haben Sie Fragen, Feedback oder Ideen? Wir würden gerne von Ihnen hören. Melden Sie sich und unser Team wird sich so schnell wie möglich bei Ihnen melden.",
+                    address: "Adresse",
+                    phone: "Telefon",
+                    email: "E-Mail",
+                    formName: "Ihr Name",
+                    formNamePlaceholder: "Geben Sie Ihren Namen ein",
+                    formEmail: "E-Mail-Adresse",
+                    formEmailPlaceholder: "Geben Sie Ihre E-Mail ein",
+                    formMessage: "Nachricht",
+                    formMessagePlaceholder: "Schreiben Sie Ihre Nachricht...",
+                    sendButton: "Nachricht senden"
+                },
+                resourcesPage: {
+                    title: "Ressourcen",
+                    subtitle: "Entdecken Sie hilfreiche Tools, Leitfäden und Communities, um Ihr Lernen und Ihre Produktivität zu beschleunigen.",
+                    designGuidelines: { title: "Design-Richtlinien", desc: "Erkunden Sie UI/UX-Best Practices und moderne Designsysteme für Ihr nächstes Projekt." },
+                    devTools: { title: "Entwicklungstools", desc: "Eine kuratierte Liste von Tools und Frameworks, die Ihren Workflow optimieren." },
+                    learning: { title: "Lernmaterialien", desc: "Greifen Sie auf kostenlose und Premium-Ressourcen zu, um Ihre Programmier- und Designfähigkeiten zu schärfen." },
+                    community: { title: "Community-Foren", desc: "Treten Sie Communities und Diskussionen bei, um Ideen auszutauschen und gemeinsam zu wachsen." },
+                    learnMore: "Mehr erfahren"
+                },
 
                 dataRetrieval: {
                     statusTitle: "Datenabruf-Status",
@@ -319,9 +718,15 @@ Nach der Aktivierung können Sie konfigurieren:
                     amount: "Betrag",
                     format: "Format",
                     status: "Status",
+                    actions: "Aktionen",
                     parsed: "Analysiert",
                     pending: "Ausstehend",
-                    error: "Fehler"
+                    assigned: "Zugewiesen",
+                    approved: "Genehmigt",
+                    error: "Fehler",
+                    noResults: "Keine Daten gefunden",
+                    download: "Herunterladen",
+                    assign: "Zuweisen"
                 },
 
                 hero: {
@@ -403,13 +808,6 @@ Nach der Aktivierung können Sie konfigurieren:
                 },
 
                 // RecentInvoicesTable
-                invoicesTable: {
-                    title: "Kürzlich gecrawlte Rechnungen",
-                    company: "Firma",
-                    amount: "Betrag",
-                    invoice: "Rechnung #",
-                    email: "E-Mail-Konto",
-                },
                 schedule: {
                     title: "Abrufzeitplan",
                     frequency: "Häufigkeit",
@@ -529,11 +927,13 @@ Nach der Aktivierung können Sie konfigurieren:
     },
 detection: {
       order: ["localStorage", "navigator"],
-      caches: ["localStorage"],             
+      caches: ["localStorage"],
+      lookupLocalStorage: "i18nextLng",
     },
 
     
     fallbackLng: "en",
+    debug: false,
 
     interpolation: {
         escapeValue: false,

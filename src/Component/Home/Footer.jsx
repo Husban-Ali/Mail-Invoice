@@ -14,7 +14,7 @@ export default function Footer() {
             MAIL INVOICE
           </h2>
           <p className="text-sm leading-relaxed mb-4 max-w-md">
-            {t("Connect inboxes (Gmail, Outlook, IMAP), auto-detect PDF & XML invoices, clean vendor data.")}
+            {t("footer.description")}
           </p>
 
           {/* Social Icon */}
@@ -28,12 +28,12 @@ export default function Footer() {
 
         {/* Right Section */}
         <div className="md:w-1/3 text-center md:text-right">
-          <h4 className="text-white font-semibold mb-4">{t("Quick Links")}</h4>
+          <h4 className="text-white font-semibold mb-4">{t("footer.quickLinks")}</h4>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-white">{t("About")}</a></li>
-            <li><a href="#" className="hover:text-white">{t("Features")}</a></li>
-            <li><a href="#" className="hover:text-white">{t("Resources")}</a></li>
-            <li><a href="#" className="hover:text-white">{t("Contact")}</a></li>
+            <li><a href="/about" className="hover:text-white">{t("footer.about")}</a></li>
+            <li><a href="/features" className="hover:text-white">{t("footer.features")}</a></li>
+            <li><a href="/resources" className="hover:text-white">{t("footer.resources")}</a></li>
+            <li><a href="/contact" className="hover:text-white">{t("footer.contact")}</a></li>
           </ul>
         </div>
       </div>

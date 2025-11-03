@@ -5,6 +5,7 @@ import VideoSection from "../Component/Home/VideoSection";
 import DashboardSection from "../Component/Home/DashboardSection";
 import ResourcesSection from "../Component/Home/ResourcesSection";
 import PricingSection from "../Component/Home/PricingSection";
+import Contact from "./Contact";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <DashboardSection/>
       <ResourcesSection/>
       <PricingSection/>
+      <Contact/>
       
     </div>
   );

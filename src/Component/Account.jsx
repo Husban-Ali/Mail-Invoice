@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getUserProfile, updateUserProfile } from '../lib/api';
 import { User, Mail, Lock, Save } from 'lucide-react';
 
 const Account = () => {
+  const { t } = useTranslation();
   const [profile, setProfile] = useState({
     name: '',
     email: '',
@@ -54,7 +56,7 @@ const Account = () => {
     return (
       <div className="p-6">
         <div className="flex items-center justify-center h-64">
-          <div className="text-gray-500">Loading profile...</div>
+          <div className="text-gray-500">{t("account.loading")}</div>
         </div>
       </div>
     );
@@ -67,9 +69,9 @@ const Account = () => {
         <div className="border-b border-gray-200 p-6">
           <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
             <User size={24} />
-            Account Settings
+            {t("account.title")}
           </h2>
-          <p className="text-sm text-gray-500 mt-1">Manage your account information</p>
+          <p className="text-sm text-gray-500 mt-1">{t("account.subtitle")}</p>
         </div>
 
         {/* Profile Form */}
@@ -89,7 +91,7 @@ const Account = () => {
           {/* Name Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Full Name
+              {t("account.fullName")}
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -109,7 +111,7 @@ const Account = () => {
           {/* Email Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email Address
+              {t("account.email")}
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -121,13 +123,13 @@ const Account = () => {
                 placeholder="email@example.com"
               />
             </div>
-            <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+            <p className="text-xs text-gray-500 mt-1">{t("account.emailNote")}</p>
           </div>
 
           {/* Phone Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Phone Number (Optional)
+              {t("account.phone")}
             </label>
             <input
               type="tel"
@@ -149,7 +151,7 @@ const Account = () => {
                 className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition flex items-center gap-2"
               >
                 <User size={16} />
-                Edit Profile
+                {t("account.editProfile")}
               </button>
             ) : (
               <>
@@ -158,7 +160,7 @@ const Account = () => {
                   className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition flex items-center gap-2"
                 >
                   <Save size={16} />
-                  Save Changes
+                  {t("account.saveChanges")}
                 </button>
                 <button
                   onClick={() => {
@@ -167,7 +169,7 @@ const Account = () => {
                   }}
                   className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition"
                 >
-                  Cancel
+                  {t("account.cancel")}
                 </button>
               </>
             )}
@@ -178,16 +180,16 @@ const Account = () => {
         <div className="border-t border-gray-200 p-6 bg-gray-50">
           <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2 mb-4">
             <Lock size={20} />
-            Security
+            {t("account.security")}
           </h3>
           <div className="space-y-3">
             <button className="w-full text-left px-4 py-3 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-              <div className="font-medium text-gray-800">Change Password</div>
-              <div className="text-sm text-gray-500">Update your password to keep your account secure</div>
+              <div className="font-medium text-gray-800">{t("account.changePassword")}</div>
+              <div className="text-sm text-gray-500">{t("account.changePasswordDesc")}</div>
             </button>
             <button className="w-full text-left px-4 py-3 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-              <div className="font-medium text-gray-800">Two-Factor Authentication</div>
-              <div className="text-sm text-gray-500">Add an extra layer of security to your account</div>
+              <div className="font-medium text-gray-800">{t("account.twoFactor")}</div>
+              <div className="text-sm text-gray-500">{t("account.twoFactorDesc")}</div>
             </button>
           </div>
         </div>

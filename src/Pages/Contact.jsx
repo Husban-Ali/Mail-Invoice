@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function Contact() {
+  const { t } = useTranslation();
   return (
     <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-16 bg-white overflow-hidden">
       {/* Left Text */}
@@ -12,23 +14,22 @@ export default function Contact() {
         transition={{ duration: 1 }}
       >
         <h2 className="text-4xl md:text-5xl font-bold font-dm leading-tight">
-          Get in Touch With Us
+          {t("contact.title")}
         </h2>
         <p className="text-lg text-gray-600 font-inter leading-relaxed max-w-md mx-auto md:mx-0">
-          Have questions, feedback, or ideas? We’d love to hear from you.
-          Reach out and our team will get back to you as soon as possible.
+          {t("contact.subtitle")}
         </p>
 
          <div className="space-y-3 mt-6">
           <p className="text-gray-700">
-            📍 <span className="font-medium">Address:</span>  
+            📍 <span className="font-medium">  &nbsp; {t("contact.address")}:</span>  
             Alexanderplatz 5, 10178 Berlin, Germany
           </p>
           <p className="text-gray-700">
-            📞 <span className="font-medium">Phone:</span> +49 30 1234567
+            📞 <span className="font-medium">{t("contact.phone")}:</span> +49 30 1234567
           </p>
           <p className="text-gray-700">
-            📧 <span className="font-medium">Email:</span> hello@digitalhaus.de
+            📧 <span className="font-medium">{t("contact.email")}:</span> hello@digitalhaus.de
           </p>
         </div>
       </motion.div>
@@ -43,34 +44,34 @@ export default function Contact() {
         <form className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Your Name
+              {t("contact.formName")}
             </label>
             <input
               type="text"
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-              placeholder="Enter your name"
+              placeholder={t("contact.formNamePlaceholder")}
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address
+              {t("contact.formEmail")}
             </label>
             <input
               type="email"
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-              placeholder="Enter your email"
+              placeholder={t("contact.formEmailPlaceholder")}
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Message
+              {t("contact.formMessage")}
             </label>
             <textarea
               rows="4"
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-              placeholder="Write your message..."
+              placeholder={t("contact.formMessagePlaceholder")}
             ></textarea>
           </div>
 
@@ -78,7 +79,7 @@ export default function Contact() {
             type="submit"
             className="w-full py-3 bg-indigo-600 text-white font-medium rounded-lg shadow hover:bg-indigo-700 transition"
           >
-            Send Message
+            {t("contact.sendButton")}
           </button>
         </form>
       </motion.div>

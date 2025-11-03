@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavig
 import "./App.css";
 import Login from "./Pages/Login.jsx";
 import Reset from "./Pages/Reset.jsx";
+import ResetUpdate from "./Pages/ResetUpdate.jsx";
 import SignUpPage from "./Pages/Signup.jsx";
 import MailInvoiceDashboard from "./Component/MailInvoiceDashboard.jsx";
 import Home from "./Pages/Home.jsx"; 
@@ -131,6 +132,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/reset" element={<Reset />} />
+        <Route path="/reset-update" element={<ResetUpdate />} />
 
         {/* Public routes wrapped with Navbar (top) and Footer (bottom) */}
         <Route element={<PublicLayout />}> 

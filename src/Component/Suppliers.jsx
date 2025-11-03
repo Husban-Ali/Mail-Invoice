@@ -1,5 +1,6 @@
 // NEW: Core Flow Implementation - split from MasterData: Suppliers page
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { listSuppliers, updateSupplier, mergeSuppliers, blockSuppliers, createSupplier, deleteSuppliers, getSupplierDuplicates } from '../lib/api';
 
 const initialSuppliers = [
@@ -10,6 +11,7 @@ const initialSuppliers = [
 ];
 
 export default function Suppliers() {
+  const { t } = useTranslation();
   const [suppliers, setSuppliers] = useState([]);
   const [selectedIds, setSelectedIds] = useState(new Set());
   const [mode, setMode] = useState('list'); // list | edit | merge | block
@@ -141,7 +143,7 @@ export default function Suppliers() {
     <div className="p-6">
       <div className="max-w-full">
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6">
-          <h3 className="text-lg font-semibold mb-4">Suppliers</h3>
+          <h3 className="text-lg font-semibold mb-4">{t("suppliers.title")}</h3>
           <div className="overflow-x-auto">
             <table className="min-w-full border border-gray-100">
               <thead className="bg-gray-50 text-gray-600 text-sm">
@@ -149,8 +151,8 @@ export default function Suppliers() {
                   <th className="p-3 border-b w-10"><input type="checkbox" onChange={(e)=>{
                     if (e.target.checked) setSelectedIds(new Set(suppliers.map(s=>s.id))); else setSelectedIds(new Set());
                   }} checked={selectedIds.size === suppliers.length} /></th>
-                  <th className="p-3 border-b text-left">Name</th>
-                  <th className="p-3 border-b text-left">Status</th>
+                  <th className="p-3 border-b text-left">{t("suppliers.name")}</th>
+                  <th className="p-3 border-b text-left">{t("suppliers.status")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -173,34 +175,34 @@ export default function Suppliers() {
         {/* Dynamic panel based on mode */}
         {mode === 'list' && (
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <h3 className="text-lg font-semibold mb-4">Supplier Details</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("suppliers.details")}</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Supplier</label>
+                <label className="block text-xs text-gray-500 mb-1">{t("suppliers.supplier")}</label>
                 <input className="w-full border border-gray-200 rounded-md p-2" value={suppliers.find(s=>selectedIds.size===1?s.id===Array.from(selectedIds)[0]: 'ACME Corp')?.name || 'ACME Corp'} readOnly />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Tax ID</label>
+                <label className="block text-xs text-gray-500 mb-1">{t("suppliers.taxId")}</label>
                 <input className="w-full border border-gray-200 rounded-md p-2" value={suppliers.find(s=>selectedIds.size===1?s.id===Array.from(selectedIds)[0]: 'ACME Corp')?.taxId || '12345'} readOnly />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Country</label>
+                <label className="block text-xs text-gray-500 mb-1">{t("suppliers.country")}</label>
                 <input className="w-full border border-gray-200 rounded-md p-2" value={suppliers.find(s=>selectedIds.size===1?s.id===Array.from(selectedIds)[0]: 'ACME Corp')?.country || 'US'} readOnly />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Category</label>
+                <label className="block text-xs text-gray-500 mb-1">{t("suppliers.category")}</label>
                 <input className="w-full border border-gray-200 rounded-md p-2" value={suppliers.find(s=>selectedIds.size===1?s.id===Array.from(selectedIds)[0]: 'ACME Corp')?.category || 'Default'} readOnly />
               </div>
             </div>
 
             <div className="flex items-center justify-between mt-6">
               <div className="flex gap-3">
-                  <button onClick={openCreate} className="px-6 py-2 border border-gray-300 rounded-md">Add</button>
-                  <button onClick={openEdit} className="px-6 py-2 border border-gray-300 rounded-md">Edit Info</button>
-                  <button onClick={openMerge} className="px-6 py-2 bg-black text-white rounded-md">Merge</button>
-                  <button onClick={findDuplicates} className="px-6 py-2 border border-gray-300 rounded-md">Find Duplicates</button>
-                  <button onClick={openBlock} className="px-6 py-2 border border-gray-300 rounded-md">Block Supplier</button>
-                  <button onClick={deleteSelected} className="px-6 py-2 border border-red-300 text-red-700 rounded-md">Delete</button>
+                  <button onClick={openCreate} className="px-6 py-2 border border-gray-300 rounded-md">{t("suppliers.add")}</button>
+                  <button onClick={openEdit} className="px-6 py-2 border border-gray-300 rounded-md">{t("suppliers.editInfo")}</button>
+                  <button onClick={openMerge} className="px-6 py-2 bg-black text-white rounded-md">{t("suppliers.merge")}</button>
+                  <button onClick={findDuplicates} className="px-6 py-2 border border-gray-300 rounded-md">{t("suppliers.findDuplicates")}</button>
+                  <button onClick={openBlock} className="px-6 py-2 border border-gray-300 rounded-md">{t("suppliers.blockSupplier")}</button>
+                  <button onClick={deleteSelected} className="px-6 py-2 border border-red-300 text-red-700 rounded-md">{t("suppliers.delete")}</button>
                 </div>
               <div className="text-xs text-gray-500">{msg}</div>
             </div>
@@ -209,29 +211,29 @@ export default function Suppliers() {
 
         {mode === 'edit' && (
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <h3 className="text-lg font-semibold mb-4">Edit Supplier Info</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("suppliers.editSupplierInfo")}</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Supplier</label>
+                <label className="block text-xs text-gray-500 mb-1">{t("suppliers.supplier")}</label>
                 <input className="w-full border border-gray-200 rounded-md p-2" value={editForm.name} onChange={(e)=>setEditForm({...editForm, name: e.target.value})} />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Tax ID</label>
+                <label className="block text-xs text-gray-500 mb-1">{t("suppliers.taxId")}</label>
                 <input className="w-full border border-gray-200 rounded-md p-2" value={editForm.taxId} onChange={(e)=>setEditForm({...editForm, taxId: e.target.value})} />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Country</label>
+                <label className="block text-xs text-gray-500 mb-1">{t("suppliers.country")}</label>
                 <input className="w-full border border-gray-200 rounded-md p-2" value={editForm.country} onChange={(e)=>setEditForm({...editForm, country: e.target.value})} />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Category</label>
+                <label className="block text-xs text-gray-500 mb-1">{t("suppliers.category")}</label>
                 <input className="w-full border border-gray-200 rounded-md p-2" value={editForm.category} onChange={(e)=>setEditForm({...editForm, category: e.target.value})} />
               </div>
             </div>
             <div className="flex items-center justify-between mt-6">
               <div className="flex gap-3">
-                <button onClick={saveEdit} className="px-6 py-2 bg-black text-white rounded-md">Save Changes</button>
-                <button onClick={cancelMode} className="px-6 py-2 border border-gray-300 rounded-md">Cancel</button>
+                <button onClick={saveEdit} className="px-6 py-2 bg-black text-white rounded-md">{t("suppliers.saveChanges")}</button>
+                <button onClick={cancelMode} className="px-6 py-2 border border-gray-300 rounded-md">{t("suppliers.cancel")}</button>
               </div>
               <div className="text-xs text-gray-500">{msg}</div>
             </div>
@@ -240,23 +242,23 @@ export default function Suppliers() {
 
         {mode === 'merge' && (
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <h3 className="text-lg font-semibold mb-4">Merge Suppliers</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("suppliers.mergeSuppliers")}</h3>
             <div className="mb-4">
-              <div className="text-sm text-gray-700">You are merging:</div>
+              <div className="text-sm text-gray-700">{t("suppliers.merging")}</div>
               <div className="text-sm font-medium">{Array.from(selectedIds).map(id=>suppliers.find(s=>s.id===id)?.name).filter(Boolean).join('  =  ')}</div>
             </div>
             <div className="mb-4">
-              <div className="text-sm text-gray-700">Result:</div>
+              <div className="text-sm text-gray-700">{t("suppliers.result")}</div>
               <ul className="text-sm list-disc ml-6">
-                <li>Keep first selected as main record</li>
-                <li>Combine invoices and tags</li>
-                <li>Archive duplicate records</li>
+                <li>{t("suppliers.keepFirst")}</li>
+                <li>{t("suppliers.combineInvoices")}</li>
+                <li>{t("suppliers.archiveDuplicates")}</li>
               </ul>
             </div>
             <div className="flex items-center justify-between mt-6">
               <div className="flex gap-3">
-                <button onClick={doMerge} className="px-6 py-2 bg-black text-white rounded-md">Save Changes</button>
-                <button onClick={cancelMode} className="px-6 py-2 border border-gray-300 rounded-md">Cancel</button>
+                <button onClick={doMerge} className="px-6 py-2 bg-black text-white rounded-md">{t("suppliers.saveChanges")}</button>
+                <button onClick={cancelMode} className="px-6 py-2 border border-gray-300 rounded-md">{t("suppliers.cancel")}</button>
               </div>
               <div className="text-xs text-gray-500">{msg}</div>
             </div>
@@ -266,15 +268,15 @@ export default function Suppliers() {
         {/* Duplicate groups panel */}
         {duplicateGroups && duplicateGroups.length > 0 && (
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mt-6">
-            <h3 className="text-lg font-semibold mb-4">Possible Duplicate Groups</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("suppliers.duplicateGroups")}</h3>
             <div className="space-y-4">
               {duplicateGroups.map((g, idx) => (
                 <div key={idx} className="p-3 border rounded-md">
                   <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium">Group {idx + 1} — {g.length || (g.suppliers?.length || 0)} records</div>
+                    <div className="text-sm font-medium">{t("suppliers.group")} {idx + 1} — {g.length || (g.suppliers?.length || 0)} {t("suppliers.records")}</div>
                     <div className="flex gap-2">
-                      <button onClick={()=>{ const arr = g.map ? g.map(s=>s.id) : (g.suppliers||[]).map(s=>s.id); setSelectedIds(new Set(arr)); setMode('merge'); setMsg('Selected group for merge'); }} className="px-3 py-1 border rounded-md text-sm">Select & Merge</button>
-                      <button onClick={()=>{ const arr = g.map ? g.map(s=>s.id) : (g.suppliers||[]).map(s=>s.id); setSelectedIds(new Set(arr)); setMsg('Selected group'); }} className="px-3 py-1 border rounded-md text-sm">Select</button>
+                      <button onClick={()=>{ const arr = g.map ? g.map(s=>s.id) : (g.suppliers||[]).map(s=>s.id); setSelectedIds(new Set(arr)); setMode('merge'); setMsg('Selected group for merge'); }} className="px-3 py-1 border rounded-md text-sm">{t("suppliers.selectMerge")}</button>
+                      <button onClick={()=>{ const arr = g.map ? g.map(s=>s.id) : (g.suppliers||[]).map(s=>s.id); setSelectedIds(new Set(arr)); setMsg('Selected group'); }} className="px-3 py-1 border rounded-md text-sm">{t("suppliers.select")}</button>
                     </div>
                   </div>
                   <div className="mt-2 text-sm grid grid-cols-2 gap-2">
@@ -294,15 +296,15 @@ export default function Suppliers() {
 
         {mode === 'block' && (
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <h3 className="text-lg font-semibold mb-4">Block Suppliers</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("suppliers.blockSuppliers")}</h3>
             <div className="mb-4">
-              <div className="text-sm text-gray-700">Are you sure you want to block the following suppliers?</div>
+              <div className="text-sm text-gray-700">{t("suppliers.confirmBlock")}</div>
               <div className="text-sm font-medium">{Array.from(selectedIds).map(id=>suppliers.find(s=>s.id===id)?.name).filter(Boolean).join(', ')}</div>
             </div>
             <div className="flex items-center justify-between mt-6">
               <div className="flex gap-3">
-                <button onClick={doBlock} className="px-6 py-2 bg-black text-white rounded-md">Confirm Block</button>
-                <button onClick={cancelMode} className="px-6 py-2 border border-gray-300 rounded-md">Cancel</button>
+                <button onClick={doBlock} className="px-6 py-2 bg-black text-white rounded-md">{t("suppliers.confirmBlockBtn")}</button>
+                <button onClick={cancelMode} className="px-6 py-2 border border-gray-300 rounded-md">{t("suppliers.cancel")}</button>
               </div>
               <div className="text-xs text-gray-500">{msg}</div>
             </div>

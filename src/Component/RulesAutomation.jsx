@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import AddRuleBuilder from './AddRuleBuilder';
 import { listRules, createRule, deleteRules as apiDeleteRules } from '../lib/api';
 
 export default function RulesAutomation() {
+  const { t } = useTranslation();
   const [showAddRule, setShowAddRule] = useState(false);
   const [editingRule, setEditingRule] = useState(null);
   const [rules, setRules] = useState([]);
@@ -42,9 +44,9 @@ export default function RulesAutomation() {
     <div className="bg-white rounded-xl shadow-md p-6 m-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-lg font-semibold">Rules & Automation</h2>
+        <h2 className="text-lg font-semibold">{t("rulesAutomation.title")}</h2>
         <button onClick={() => setShowAddRule(true)} className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
-          Add New Rule
+          {t("rulesAutomation.addNewRule")}
         </button>
       </div>
 
@@ -56,17 +58,17 @@ export default function RulesAutomation() {
               <th className="p-3 border-b w-10">
                 <input type="checkbox" />
               </th>
-              <th className="p-3 border-b text-left">Name</th>
-              <th className="p-3 border-b text-left">Trigger</th>
-              <th className="p-3 border-b text-left">Action</th>
-              <th className="p-3 border-b text-left">Status</th>
+              <th className="p-3 border-b text-left">{t("rulesAutomation.name")}</th>
+              <th className="p-3 border-b text-left">{t("rulesAutomation.trigger")}</th>
+              <th className="p-3 border-b text-left">{t("rulesAutomation.action")}</th>
+              <th className="p-3 border-b text-left">{t("rulesAutomation.status")}</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={5} className="p-6 text-center text-gray-500">Loading...</td></tr>
+              <tr><td colSpan={5} className="p-6 text-center text-gray-500">{t("rulesAutomation.loading")}</td></tr>
             ) : rules.length === 0 ? (
-              <tr><td colSpan={5} className="p-6 text-center text-gray-500">No rules defined</td></tr>
+              <tr><td colSpan={5} className="p-6 text-center text-gray-500">{t("rulesAutomation.noRules")}</td></tr>
             ) : (
               rules.map((rule) => (
                 <tr key={rule.id} className="text-sm hover:bg-gray-50">
@@ -89,9 +91,9 @@ export default function RulesAutomation() {
                       : '—'
                   }</td>
                   <td className="p-3 border-b">{rule.active ? (
-                    <span className="flex items-center text-green-600"><span className="w-2.5 h-2.5 bg-green-500 rounded-full mr-2"></span>Active</span>
+                    <span className="flex items-center text-green-600"><span className="w-2.5 h-2.5 bg-green-500 rounded-full mr-2"></span>{t("rulesAutomation.active")}</span>
                   ) : (
-                    <span className="flex items-center text-gray-500"><span className="w-2.5 h-2.5 bg-gray-400 rounded-full mr-2"></span>Inactive</span>
+                    <span className="flex items-center text-gray-500"><span className="w-2.5 h-2.5 bg-gray-400 rounded-full mr-2"></span>{t("rulesAutomation.inactive")}</span>
                   )}</td>
                 </tr>
               ))
@@ -107,7 +109,7 @@ export default function RulesAutomation() {
             // open editor for first selected
             const first = rules.find(r=> selectedIds.has(r.id));
             if (first) { setEditingRule(first); setShowAddRule(true); }
-          }} className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100">Edit</button>
+          }} className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100">{t("rulesAutomation.edit")}</button>
 
           <button onClick={async ()=>{
             // duplicate first selected
@@ -118,7 +120,7 @@ export default function RulesAutomation() {
               await createRule(payload);
               loadRules();
             } catch (e) { console.warn('Duplicate failed', e); }
-          }} className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100">Duplicate</button>
+          }} className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100">{t("rulesAutomation.duplicate")}</button>
         </div>
 
         <button onClick={async ()=>{
@@ -130,7 +132,7 @@ export default function RulesAutomation() {
             setSelectedIds(new Set());
             loadRules();
           } catch (e) { console.warn('Delete failed', e); }
-        }} className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100">Delete</button>
+        }} className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100">{t("rulesAutomation.delete")}</button>
       </div>
       {showAddRule && (
         <AddRuleModal open={showAddRule} onClose={() => { setShowAddRule(false); setEditingRule(null); }} onSaved={(r)=>{ setShowAddRule(false); setEditingRule(null); loadRules(); }} initialRule={editingRule} />
@@ -141,13 +143,14 @@ export default function RulesAutomation() {
 
 
 function AddRuleModal({ open, onClose, onSaved, initialRule }) {
+  const { t } = useTranslation();
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div className="bg-white rounded-xl shadow-lg w-full max-w-5xl p-4">
         <div className="flex justify-between items-center mb-2">
-          <h4 className="text-lg font-semibold">Add New Rule</h4>
-          <button onClick={onClose} className="text-sm text-gray-600 hover:text-gray-800">Close</button>
+          <h4 className="text-lg font-semibold">{t("rulesAutomation.addNewRule")}</h4>
+          <button onClick={onClose} className="text-sm text-gray-600 hover:text-gray-800">{t("rulesAutomation.close")}</button>
         </div>
         <AddRuleBuilder onSaved={onSaved} initialRule={initialRule} onCancel={onClose} />
       </div>

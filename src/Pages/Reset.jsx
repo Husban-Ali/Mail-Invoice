@@ -1,16 +1,37 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import supabase from '../lib/supabaseClient';
 
 export default function Reset() {
   const [email, setEmail] = useState('');
+  const [sending, setSending] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Reset password email:', email);
+    setMessage('');
+    setError('');
+    if (!email) {
+      setError('Please enter your email.');
+      return;
+    }
+    setSending(true);
+    try {
+      const redirectTo = `${window.location.origin}/reset-update`;
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, { redirectTo });
+      if (resetError) throw resetError;
+      setMessage('Reset link sent. Please check your email.');
+    } catch (err) {
+      setError(err?.message || 'Failed to send reset link. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleBackToSignIn = () => {
-    console.log('Navigate to sign in');
+    navigate('/login');
   };
 
   return (
@@ -50,10 +71,14 @@ export default function Reset() {
 
           <button
             type="submit"
-            className="w-full bg-black text-white py-3 rounded-xl font-semibold text-xl hover:bg-gray-800 transition-colors"
+            disabled={sending}
+            className={`w-full bg-black text-white py-3 rounded-xl font-semibold text-xl hover:bg-gray-800 transition-colors ${sending ? 'opacity-60 cursor-not-allowed' : ''}`}
           >
-            Send Reset Link
+            {sending ? 'Sending…' : 'Send Reset Link'}
           </button>
+
+          {message && <p className="text-green-600 mt-2">{message}</p>}
+          {error && <p className="text-red-500 mt-2">{error}</p>}
         </form>
 
         {/* Footer Buttons */}
@@ -61,9 +86,12 @@ export default function Reset() {
           <button
             onClick={handleBackToSignIn}
             className="text-gray-600 hover:text-gray-900 font-medium text-base transition-colors"
-            href="/"          >
+          >
             Go to Sign in
           </button>
+          <div className="mt-2 text-sm">
+            Or <Link to="/login" className="text-black hover:underline">back to login</Link>
+          </div>
         </div>
       </div>
     </div>

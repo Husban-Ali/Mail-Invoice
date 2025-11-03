@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getScrapedStats } from '../lib/api';
 
 function startOfWeekISO(date) {
@@ -43,6 +44,7 @@ function computeChange(current, previous) {
 }
 
 function TimeMetrics() {
+  const { t } = useTranslation();
   const [metrics, setMetrics] = useState({ week: null, month: null, year: null });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -98,9 +100,9 @@ function TimeMetrics() {
         const yrPrev = Number(yPrev?.stats?.totalInvoices || 0);
 
         setMetrics({
-          week: { period: 'This Week', value: wkCur, change: computeChange(wkCur, wkPrev).text, trend: computeChange(wkCur, wkPrev).trend },
-          month: { period: 'This Month', value: mnCur, change: computeChange(mnCur, mnPrev).text, trend: computeChange(mnCur, mnPrev).trend },
-          year: { period: 'This Year', value: yrCur, change: computeChange(yrCur, yrPrev).text, trend: computeChange(yrCur, yrPrev).trend },
+          week: { period: t('timeMetrics.thisWeek'), value: wkCur, change: computeChange(wkCur, wkPrev).text, trend: computeChange(wkCur, wkPrev).trend },
+          month: { period: t('timeMetrics.thisMonth'), value: mnCur, change: computeChange(mnCur, mnPrev).text, trend: computeChange(mnCur, mnPrev).trend },
+          year: { period: t('timeMetrics.thisYear'), value: yrCur, change: computeChange(yrCur, yrPrev).text, trend: computeChange(yrCur, yrPrev).trend },
         });
 
       } catch (e) {
@@ -119,7 +121,7 @@ function TimeMetrics() {
         <>
           {[0,1,2].map(i => (
             <div key={i} className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-              <p className="text-sm text-gray-500 mb-2">{i===0?'This Week':i===1?'This Month':'This Year'}</p>
+              <p className="text-sm text-gray-500 mb-2">{i===0?t('timeMetrics.thisWeek'):i===1?t('timeMetrics.thisMonth'):t('timeMetrics.thisYear')}</p>
               <div className="flex items-end gap-4">
                 <p className="text-3xl font-bold text-gray-800">—</p>
                 <div className="h-16 w-32 mb-2 bg-gray-100 rounded" />

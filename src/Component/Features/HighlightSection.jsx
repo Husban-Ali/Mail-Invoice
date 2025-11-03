@@ -1,7 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function HighlightSection() {
+  const { t } = useTranslation();
+  
   return (
     <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-16 bg-white overflow-hidden">
       {/* Image */}
@@ -26,16 +29,15 @@ export default function HighlightSection() {
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <h2 className="text-3xl font-bold mb-4">Seamless Integration</h2>
+        <h2 className="text-3xl font-bold mb-4">{t("features.highlight.title")}</h2>
         <p className="text-gray-600 leading-relaxed mb-6">
-          Connect your favorite tools like Slack, Google Drive, and Notion in seconds.
-          Our integrations keep everything in sync—so you can focus on creating, not switching tabs.
+          {t("features.highlight.desc")}
         </p>
         <motion.button
           whileTap={{ scale: 0.95 }}
           className="px-6 py-3 bg-black text-white rounded-lg border border-black hover:bg-white hover:text-black transition-all"
         >
-          Learn More
+          {t("features.highlight.learnMore")}
         </motion.button>
       </motion.div>
     </section>

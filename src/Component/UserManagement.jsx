@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getUsers, updateUserStatus } from '../lib/api';
 
 const UserManagement = () => {
+  const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,19 +35,19 @@ const UserManagement = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-xl font-semibold mb-4">User Management</h2>
+      <h2 className="text-xl font-semibold mb-4">{t("userManagement.title")}</h2>
       {loading ? (
-        <div>Loading...</div>
+        <div>{t("userManagement.loading")}</div>
       ) : error ? (
         <div className="text-red-500">{error}</div>
       ) : (
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="bg-gray-100 text-left">
-              <th className="py-2 px-3">Name</th>
-              <th className="py-2 px-3">Email</th>
-              <th className="py-2 px-3">Status</th>
-              <th className="py-2 px-3">Actions</th>
+              <th className="py-2 px-3">{t("userManagement.name")}</th>
+              <th className="py-2 px-3">{t("userManagement.email")}</th>
+              <th className="py-2 px-3">{t("userManagement.status")}</th>
+              <th className="py-2 px-3">{t("userManagement.actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -60,9 +62,9 @@ const UserManagement = () => {
                     onChange={e => handleStatusChange(user.id, e.target.value)}
                     className="px-2 py-1 text-xs border border-gray-300 rounded-md"
                   >
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                    <option value="blocked">Blocked</option>
+                    <option value="active">{t("userManagement.active")}</option>
+                    <option value="inactive">{t("userManagement.inactive")}</option>
+                    <option value="blocked">{t("userManagement.blocked")}</option>
                   </select>
                 </td>
               </tr>

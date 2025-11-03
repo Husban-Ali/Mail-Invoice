@@ -1,29 +1,32 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function TeamSection() {
+  const { t } = useTranslation();
+  
   const team = [
     {
       img: "https://images.pexels.com/photos/27333761/pexels-photo-27333761/free-photo-of-a-man-with-his-arms-crossed.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       name: "Sebestan",
-      role: "Founder & CEO",
+      role: t("about.team.founder"),
     },
     {
       img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&q=80",
       name: "David",
-      role: "UI/UX Designer",
+      role: t("about.team.designer"),
     },
     {
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
       name: "Robert",
-      role: "Lead Developer",
+      role: t("about.team.developer"),
     },
   ];
 
   return (
     <section className="px-8 py-16 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-10">Meet Our Team</h2>
+        <h2 className="text-3xl font-bold mb-10">{t("about.team.title")}</h2>
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
           initial={{ opacity: 0, y: 40 }}

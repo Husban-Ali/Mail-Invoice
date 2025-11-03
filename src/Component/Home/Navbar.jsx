@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import navlogo1 from "../../assets/navlogo1.png";
@@ -10,6 +10,7 @@ export default function Navbar() {
   const [showLangDropdown, setShowLangDropdown] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const sync = () => {
@@ -45,18 +46,19 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white">
       <div className="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
         {/* Logo */}
-        <motion.div
-          initial={{ x: -60, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="flex items-center select-none"
-        >
-          <motion.img
-            src={navlogo1}
-            alt="Mail Invoice Logo"
-            className="h-16 w-auto object-contain select-none"
-          />
-        </motion.div>
+         <motion.div
+      initial={{ x: -60, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="flex items-center select-none cursor-pointer"
+      onClick={() => navigate("/")}
+    >
+      <motion.img
+        src={navlogo1}
+        alt="Mail Invoice Logo"
+        className="h-16 w-auto object-contain select-none"
+      />
+    </motion.div>
 
         {/* Desktop Links */}
         <motion.div

@@ -1,15 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function MissionSection() {
+  const { t } = useTranslation();
+  
   const items = [
     {
-      title: "Our Mission",
-      desc: "To empower teams and individuals through accessible and impactful software solutions.",
+      title: t("about.mission.ourMission"),
+      desc: t("about.mission.ourMissionDesc"),
     },
     {
-      title: "Our Vision",
-      desc: "To become a global leader in innovation-driven digital transformation.",
+      title: t("about.mission.ourVision"),
+      desc: t("about.mission.ourVisionDesc"),
     },
   ];
 
@@ -22,9 +25,9 @@ export default function MissionSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl font-bold mb-3">What Drives Us</h2>
+          <h2 className="text-3xl font-bold mb-3">{t("about.mission.title")}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We believe in crafting software that makes everyday work simpler, faster, and smarter.
+            {t("about.mission.subtitle")}
           </p>
         </motion.div>
 

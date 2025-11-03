@@ -1,29 +1,32 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function Resources() {
+  const { t } = useTranslation();
+  
   const resources = [
     {
-      title: "Design Guidelines",
-      desc: "Explore UI/UX best practices and modern design systems for your next project.",
+      title: t("resourcesPage.designGuidelines.title"),
+      desc: t("resourcesPage.designGuidelines.desc"),
       img: "https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=800&q=80",
       link: "#",
     },
     {
-      title: "Development Tools",
-      desc: "A curated list of tools and frameworks that streamline your workflow.",
+      title: t("resourcesPage.devTools.title"),
+      desc: t("resourcesPage.devTools.desc"),
       img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
       link: "#",
     },
     {
-      title: "Learning Materials",
-      desc: "Access free and premium resources to sharpen your coding and design skills.",
+      title: t("resourcesPage.learning.title"),
+      desc: t("resourcesPage.learning.desc"),
       img: "https://images.unsplash.com/photo-1555529771-35a38b34c7e5?auto=format&fit=crop&w=800&q=80",
       link: "#",
     },
     {
-      title: "Community Forums",
-      desc: "Join communities and discussions to share ideas and grow together.",
+      title: t("resourcesPage.community.title"),
+      desc: t("resourcesPage.community.desc"),
       img: "https://images.unsplash.com/photo-1581092334409-21d8b7d3e1f9?auto=format&fit=crop&w=800&q=80",
       link: "#",
     },
@@ -32,10 +35,9 @@ export default function Resources() {
   return (
     <section className="px-6 md:px-20 py-16 bg-gray-50 overflow-hidden">
       <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">Resources</h2>
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">{t("resourcesPage.title")}</h2>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-          Discover helpful tools, guides, and communities to accelerate your
-          learning and productivity.
+          {t("resourcesPage.subtitle")}
         </p>
       </div>
 
@@ -63,7 +65,7 @@ export default function Resources() {
                 href={res.link}
                 className="text-indigo-600 font-medium hover:underline"
               >
-                Learn More →
+                {t("resourcesPage.learnMore")} →
               </a>
             </div>
           </motion.div>

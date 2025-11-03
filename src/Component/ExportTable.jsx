@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   listExportTemplates,
   createExportTemplate,
@@ -10,6 +11,7 @@ import {
 } from "../lib/api";
 
 export default function ExportTable() {
+  const { t } = useTranslation();
   const [templates, setTemplates] = useState([]);
   const [runs, setRuns] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,10 +29,10 @@ export default function ExportTable() {
   const [fieldsInput, setFieldsInput] = useState("");
 
   const entities = useMemo(() => [
-    { key: "invoices", label: "Invoices" },
-    { key: "suppliers", label: "Suppliers" },
-    { key: "rules", label: "Rules" },
-  ], []);
+    { key: "invoices", label: t("export.invoices") },
+    { key: "suppliers", label: t("export.suppliers") },
+    { key: "rules", label: t("export.rules") },
+  ], [t]);
 
   const formats = ["CSV", "JSON"]; // Future: Excel, PDF
 
@@ -163,19 +165,19 @@ export default function ExportTable() {
     <div className="p-4 space-y-6">
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <h2 className="text-lg font-semibold">Exports</h2>
+          <h2 className="text-lg font-semibold">{t("export.title")}</h2>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowNew((v) => !v)}
               className="bg-black text-white px-3 py-2 rounded-lg hover:bg-gray-800 text-sm"
             >
-              {showNew ? "Close" : "New Template"}
+              {showNew ? t("export.close") : t("export.newTemplate")}
             </button>
             <button
               onClick={handleCreatePresets}
               className="bg-gray-900 text-white px-3 py-2 rounded-lg hover:bg-gray-800 text-sm"
             >
-              Create Presets
+              {t("export.createPresets")}
             </button>
           </div>
         </div>
@@ -184,7 +186,7 @@ export default function ExportTable() {
           <div className="border border-gray-200 rounded-lg p-4 mb-4 bg-gray-50">
             <div className="grid md:grid-cols-5 grid-cols-1 gap-3">
               <input
-                placeholder="Template name"
+                placeholder={t("export.templateName")}
                 value={newTemplate.name}
                 onChange={(e) => setNewTemplate((s) => ({ ...s, name: e.target.value }))}
                 className="border rounded-md px-3 py-2 text-sm w-full"
@@ -208,7 +210,7 @@ export default function ExportTable() {
                 ))}
               </select>
               <input
-                placeholder="Fields (comma-separated)"
+                placeholder={t("export.fieldsPlaceholder")}
                 value={fieldsInput}
                 onChange={(e) => setFieldsInput(e.target.value)}
                 className="border rounded-md px-3 py-2 text-sm w-full"
@@ -219,7 +221,7 @@ export default function ExportTable() {
                   disabled={saving || !newTemplate.name}
                   className="bg-black text-white px-3 py-2 rounded-lg hover:bg-gray-800 text-sm disabled:opacity-60"
                 >
-                  {saving ? "Saving…" : "Save Template"}
+                  {saving ? t("export.saving") : t("export.saveTemplate")}
                 </button>
               </div>
             </div>
@@ -234,39 +236,39 @@ export default function ExportTable() {
           <table className="min-w-full border-collapse text-sm">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200 text-left text-gray-600">
-                <th className="py-3 px-4 font-medium">Name</th>
-                <th className="py-3 px-4 font-medium">Entity</th>
-                <th className="py-3 px-4 font-medium">Format</th>
-                <th className="py-3 px-4 font-medium">Fields</th>
-                <th className="py-3 px-4 font-medium">Actions</th>
+                <th className="py-3 px-4 font-medium">{t("export.name")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.entity")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.format")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.fields")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.actions")}</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td className="py-3 px-4" colSpan={5}>Loading…</td></tr>
+                <tr><td className="py-3 px-4" colSpan={5}>{t("export.loading")}</td></tr>
               ) : templates.length === 0 ? (
-                <tr><td className="py-3 px-4 text-gray-500" colSpan={5}>No templates yet</td></tr>
+                <tr><td className="py-3 px-4 text-gray-500" colSpan={5}>{t("export.noTemplates")}</td></tr>
               ) : (
-                templates.map((t) => (
-                  <tr key={t.id} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="py-3 px-4 text-gray-800">{t.name}</td>
-                    <td className="py-3 px-4 text-gray-700">{t.entity}</td>
-                    <td className="py-3 px-4 text-gray-700">{t.format}</td>
-                    <td className="py-3 px-4 text-gray-700">{Array.isArray(t.fields) ? t.fields.length : 0}</td>
+                templates.map((template) => (
+                  <tr key={template.id} className="border-b border-gray-100 hover:bg-gray-50">
+                    <td className="py-3 px-4 text-gray-800">{template.name}</td>
+                    <td className="py-3 px-4 text-gray-700">{template.entity}</td>
+                    <td className="py-3 px-4 text-gray-700">{template.format}</td>
+                    <td className="py-3 px-4 text-gray-700">{Array.isArray(template.fields) ? template.fields.length : 0}</td>
                     <td className="py-3 px-4 text-gray-700">
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => handleRunTemplate(t.id)}
+                          onClick={() => handleRunTemplate(template.id)}
                           disabled={running}
                           className="px-3 py-1.5 rounded-md bg-black text-white hover:bg-gray-800 text-xs disabled:opacity-60"
                         >
-                          {running ? "Running…" : "Run"}
+                          {running ? t("export.running") : t("export.run")}
                         </button>
                         <button
-                          onClick={() => handleDelete(t.id)}
+                          onClick={() => handleDelete(template.id)}
                           className="px-3 py-1.5 rounded-md bg-gray-200 text-gray-800 hover:bg-gray-300 text-xs"
                         >
-                          Delete
+                          {t("export.delete")}
                         </button>
                       </div>
                     </td>
@@ -281,7 +283,7 @@ export default function ExportTable() {
       {/* Runs */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <h3 className="text-md font-semibold">Recent runs</h3>
+          <h3 className="text-md font-semibold">{t("export.recentRuns")}</h3>
           <div className="flex items-center gap-2">
             <select
               value={adhoc.entity}
@@ -302,7 +304,7 @@ export default function ExportTable() {
               ))}
             </select>
             <input
-              placeholder="Fields (comma-separated)"
+              placeholder={t("export.fieldsPlaceholder")}
               value={adhocFields}
               onChange={(e) => setAdhocFields(e.target.value)}
               className="border rounded-md px-2 py-1.5 text-sm"
@@ -313,7 +315,7 @@ export default function ExportTable() {
               disabled={running}
               className="bg-black text-white px-3 py-2 rounded-lg hover:bg-gray-800 text-sm disabled:opacity-60"
             >
-              {running ? "Running…" : "Run Ad-hoc"}
+              {running ? t("export.running") : t("export.runAdhoc")}
             </button>
           </div>
         </div>
@@ -322,22 +324,22 @@ export default function ExportTable() {
           <table className="min-w-full border-collapse text-sm">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200 text-left text-gray-600">
-                <th className="py-3 px-4 font-medium">Name</th>
-                <th className="py-3 px-4 font-medium">Entity</th>
-                <th className="py-3 px-4 font-medium">Format</th>
-                <th className="py-3 px-4 font-medium">Status</th>
-                <th className="py-3 px-4 font-medium">Rows</th>
-                <th className="py-3 px-4 font-medium">Finished</th>
-                <th className="py-3 px-4 font-medium">Download</th>
+                <th className="py-3 px-4 font-medium">{t("export.name")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.entity")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.format")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.status")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.rows")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.finished")}</th>
+                <th className="py-3 px-4 font-medium">{t("export.download")}</th>
               </tr>
             </thead>
             <tbody>
               {runs.length === 0 ? (
-                <tr><td className="py-3 px-4 text-gray-500" colSpan={7}>No runs yet</td></tr>
+                <tr><td className="py-3 px-4 text-gray-500" colSpan={7}>{t("export.noRuns")}</td></tr>
               ) : (
                 runs.map((r) => (
                   <tr key={r.id} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="py-3 px-4 text-gray-800">{r.name || "(ad-hoc)"}</td>
+                    <td className="py-3 px-4 text-gray-800">{r.name || t("export.adHoc")}</td>
                     <td className="py-3 px-4 text-gray-700">{r.entity}</td>
                     <td className="py-3 px-4 text-gray-700">{r.format}</td>
                     <td className="py-3 px-4 text-gray-700">{r.status}</td>
@@ -351,15 +353,15 @@ export default function ExportTable() {
                           rel="noreferrer"
                           className="text-blue-600 hover:underline"
                         >
-                          Download
+                          {t("export.download")}
                         </a>
                       ) : r.status === 'Completed' && !r.file_url ? (
                         <span className="text-orange-500 text-xs" title={r.error || "Storage upload failed"}>
-                          ⚠️ No file
+                          ⚠️ {t("export.noFile")}
                         </span>
                       ) : r.status === 'Failed' ? (
                         <span className="text-red-500 text-xs" title={r.error || "Run failed"}>
-                          ❌ Failed
+                          ❌ {t("export.failed")}
                         </span>
                       ) : (
                         <span className="text-gray-400">—</span>
