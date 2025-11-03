@@ -10,7 +10,7 @@ const inferApiBase = () => {
     // Prefer 8080 (backend), fallback 3000
     return `${protocol}//${hostname}:8080`;
   } catch {
-    return 'http://localhost:8080';
+    return 'hus-three.vercel.app';
   }
 };
 
